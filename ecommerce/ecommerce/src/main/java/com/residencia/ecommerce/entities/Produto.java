@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -31,13 +32,14 @@ public class Produto {
 	@Column(name = "nome_produto")
 	private String nomeProduto;
 	
-	@NotBlank (message = "Preencha a descrição")
-	@Size(max = 40, message = "numero maximo de caracteres 40")
+	@NotBlank (message = "Preencha a descrição! ") // Não pode ficar em branco
+	@Size(max = 40, message = "Número máximo de caracteres execedido! (40) ") //Não pode exceder 40 caracteres
 	@Column(name = "descricao_produto", nullable = false, length = 40)
 	private String descricaoProduto;
 
-	@DecimalMax(value = "5000", message = "O preço não pode ser maior que R${value}.00")
-	@DecimalMin(value = "5", message = "O preço não pode ser menor que R${value}.00")
+	@NotNull(message = "Adicione um preço! ") //Não pode ser nulo (NotBlank é pra String, NotNull pra números etc etc)
+	@DecimalMax(value = "5000", message = "O preço não pode ser maior que R$ {value}.00") //O preço não pode ser menor que 5 merreis
+	@DecimalMin(value = "5", message = "O preço não pode ser menor que R$ {value}.00") //O preço não pode ser maior que 5k merreis
 	@Column(name = "preco_produto")
 	private BigDecimal precoProduto;
 

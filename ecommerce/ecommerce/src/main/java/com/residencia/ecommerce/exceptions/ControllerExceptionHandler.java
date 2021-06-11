@@ -24,7 +24,7 @@ protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotV
    for (FieldError error : ex.getBindingResult().getFieldErrors()) {
 	   listErros.add(error.getField() + ": " + error.getDefaultMessage());
    }
-	ErroResposta erroResposta = new ErroResposta(status.value(), "Existem campos Inválidos", LocalDateTime.now(), listErros);
+	ErroResposta erroResposta = new ErroResposta(status.value(), "Existem campos inválidos!", LocalDateTime.now(), listErros);
 	
 	return super.handleExceptionInternal(ex, erroResposta, headers, status, request); 
 }
