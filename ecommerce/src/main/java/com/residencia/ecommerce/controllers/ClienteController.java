@@ -2,6 +2,8 @@ package com.residencia.ecommerce.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.residencia.ecommerce.entities.Cliente;
@@ -44,20 +47,31 @@ public class ClienteController {
 		return clienteService.count();
 	}
 
+//	@PostMapping
+//	public ResponseEntity<ClienteVO> save(@RequestBody ClienteVO clienteVO) {
+//		HttpHeaders headers = new HttpHeaders();
+//		ClienteVO novoClienteVO = clienteService.save(clienteVO);
+//
+//		if (null != novoClienteVO)
+//			return new ResponseEntity<>(novoClienteVO, headers, HttpStatus.OK);
+//		else
+//			return new ResponseEntity<>(novoClienteVO, headers, HttpStatus.BAD_REQUEST);
+//	}
+	
 	@PostMapping
-	public ResponseEntity<ClienteVO> save(@RequestBody ClienteVO clienteVO) {
-		HttpHeaders headers = new HttpHeaders();
-		ClienteVO novoClienteVO = clienteService.save(clienteVO);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Cliente> save(@Valid @RequestBody Cliente cliente) {
+        HttpHeaders headers = new HttpHeaders();
 
-		if (null != novoClienteVO)
-			return new ResponseEntity<>(novoClienteVO, headers, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(novoClienteVO, headers, HttpStatus.BAD_REQUEST);
-	}
+        if (null != clienteService.save(cliente))
+            return new ResponseEntity<>(clienteService.save(cliente), headers, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(clienteService.save(cliente), headers, HttpStatus.BAD_REQUEST);
+    }
 
 	@PutMapping
-	public Cliente update(@RequestBody Integer id, Cliente cliente) {
-		return clienteService.update(id, cliente);
+	public ClienteVO update(@Valid @RequestParam Integer id, @RequestBody ClienteVO clienteVO) {
+		return clienteService.update(id, clienteVO);
 	}
 
 	@DeleteMapping

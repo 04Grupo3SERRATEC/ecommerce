@@ -58,7 +58,7 @@ public class ProdutoController {
     }
 
     @PutMapping
-    public Produto update(@Valid @RequestBody Integer id, Produto produto) {
+    public Produto update(@Valid @RequestParam Integer id, @RequestBody Produto produto) {
         return produtoService.update(id, produto);
     }
 

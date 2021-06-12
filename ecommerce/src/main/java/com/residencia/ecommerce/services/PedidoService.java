@@ -45,9 +45,8 @@ public class PedidoService {
         novoPedido.setCliente(pedido.getCliente());
         novoPedido.setDataPedido(pedido.getDataPedido());
         novoPedido.setProdutoPedido(pedido.getProdutoPedido());
-        novoPedido.setListaProdutosPedido(pedido.getListaProdutosPedido());
         novoPedido.setNumeroPedido(pedido.getNumeroPedido());
-        novoPedido.setStatus(pedido.getListaProdutosPedido());
+        novoPedido.setStatus(pedido.getStatus());
         novoPedido.setPedidoId(pedido.getPedidoId());
         novoPedido.setValorTotalPedido(pedido.getValorTotalPedido());
     }

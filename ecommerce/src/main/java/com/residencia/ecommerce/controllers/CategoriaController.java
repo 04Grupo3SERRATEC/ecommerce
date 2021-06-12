@@ -58,7 +58,7 @@ public class CategoriaController {
     }
 
     @PutMapping
-    public Categoria update(@Valid @RequestBody Integer id, Categoria categoria) {
+    public Categoria update(@Valid @RequestParam Integer id, @RequestBody Categoria categoria) {
         return categoriaService.update(id, categoria);
     }
 

@@ -1,26 +1,11 @@
-package com.residencia.ecommerce.entities;
+package com.residencia.ecommerce.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class CategoriaVO {
 
-@Entity
-@Table(name = "categoria")
-public class Categoria {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "categoria_id")
 	private Integer categoriaId;
-	
-	@Column(name = "nome_categoria")
 	private String nomeCategoria;
-	
-	@Column(name = "descricao_categoria")
 	private String descricaoCategoria;
-	
+
 	public Integer getCategoriaId() {
 		return categoriaId;
 	}
@@ -44,5 +29,5 @@ public class Categoria {
 	public void setDescricaoCategoria(String descricaoCategoria) {
 		this.descricaoCategoria = descricaoCategoria;
 	}
-	
+
 }

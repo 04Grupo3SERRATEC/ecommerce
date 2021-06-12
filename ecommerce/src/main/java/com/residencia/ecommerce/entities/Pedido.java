@@ -25,11 +25,11 @@ public class Pedido {
 	@Column(name = "numero_pedido")
 	private Integer numeroPedido;
 
-	@Column(name = "lista_de_produtos_do_pedido")
-	private String listaProdutosPedido;
-
 	@Column(name = "valor_total_pedido")
 	private BigDecimal valorTotalPedido;
+	
+	@Column(name = "lista_de_produtos_do_pedido")
+	private String listaDeProdutosDoPedido;
 
 	@Column(name = "data_pedido")
 	private Calendar dataPedido;
@@ -58,14 +58,6 @@ public class Pedido {
 
 	public void setNumeroPedido(Integer numeroPedido) {
 		this.numeroPedido = numeroPedido;
-	}
-
-	public String getListaProdutosPedido() {
-		return listaProdutosPedido;
-	}
-
-	public void setListaProdutosPedido(String listaProdutosPedido) {
-		this.listaProdutosPedido = listaProdutosPedido;
 	}
 
 	public BigDecimal getValorTotalPedido() {
@@ -106,6 +98,14 @@ public class Pedido {
 
 	public void setProdutoPedido(ProdutoPedido produtoPedido) {
 		this.produtoPedido = produtoPedido;
+	}
+
+	public String getListaDeProdutosDoPedido() {
+		return listaDeProdutosDoPedido;
+	}
+
+	public void setListaDeProdutosDoPedido(String listaDeProdutosDoPedido) {
+		this.listaDeProdutosDoPedido = listaDeProdutosDoPedido;
 	}
 
 }

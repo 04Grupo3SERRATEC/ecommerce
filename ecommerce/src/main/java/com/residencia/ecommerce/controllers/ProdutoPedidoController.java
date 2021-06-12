@@ -2,6 +2,8 @@ package com.residencia.ecommerce.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -54,7 +56,7 @@ public class ProdutoPedidoController {
     }
 
     @PutMapping
-    public ProdutoPedido update(@RequestBody Integer id, ProdutoPedido produtoPedido) {
+    public ProdutoPedido update(@Valid @RequestParam Integer id, @RequestBody ProdutoPedido produtoPedido) {
         return produtoPedidoService.update(id, produtoPedido);
     }
 

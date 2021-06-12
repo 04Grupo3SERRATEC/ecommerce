@@ -2,6 +2,8 @@ package com.residencia.ecommerce.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -55,7 +57,7 @@ public class EnderecoController {
     }
 
     @PutMapping
-    public Endereco update(@RequestBody Integer id, Endereco endereco) {
+    public Endereco update(@Valid @RequestParam Integer id, @RequestBody Endereco endereco) {
         return enderecoService.update(id, endereco);
     }
 

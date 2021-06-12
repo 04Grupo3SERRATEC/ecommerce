@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "endereco")
 public class Endereco {
@@ -41,6 +43,7 @@ public class Endereco {
 	private String uf;
 	
 	@OneToMany(mappedBy = "endereco", cascade = {CascadeType.PERSIST})
+	@JsonBackReference
 	private List<Cliente> cliente;
 
 	public Integer getEnderecoId() {
