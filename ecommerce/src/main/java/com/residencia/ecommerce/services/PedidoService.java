@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.residencia.ecommerce.entities.Pedido;
+import com.residencia.ecommerce.entities.Produto;
+import com.residencia.ecommerce.entities.ProdutoPedido;
 import com.residencia.ecommerce.repositories.PedidoRepository;
 import com.residencia.ecommerce.vo.FinalizarPedidoVO;
+import com.residencia.ecommerce.vo.PedidoVO;
 
 @Service
 public class PedidoService {
@@ -90,6 +93,20 @@ public class PedidoService {
         }
     }
     
-    
+    public PedidoVO emitirPedido(Integer pedidoId) {
+  		Pedido pedido =  pedidoRepository.getById(pedidoId);
+  		
+  		PedidoVO pedidoVO = new PedidoVO();
+  		ProdutoPedido ppVO = new ProdutoPedido();
+  		Produto p = new Produto();
+  		
+  		pedidoVO.setPedidoId(pedido.getPedidoId());
+  		pedidoVO.setDataPedido(pedido.getDataPedido());
+  		pedidoVO.setValorTotalPedido(pedido.getValorTotalPedido());
+  		ppVO.setQuantidade(ppVO.getQuantidade());
+  		p.setNomeProduto(p.getNomeProduto());
+  		
+  		return pedidoVO;
+  	}
 
 }

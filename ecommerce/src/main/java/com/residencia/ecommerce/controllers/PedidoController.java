@@ -2,6 +2,7 @@ package com.residencia.ecommerce.controllers;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.residencia.ecommerce.entities.Pedido;
+import com.residencia.ecommerce.exceptions.EmailException;
+import com.residencia.ecommerce.services.EmailService;
 import com.residencia.ecommerce.services.PedidoService;
 import com.residencia.ecommerce.vo.FinalizarPedidoVO;
+import com.residencia.ecommerce.vo.PedidoVO;
 
 @RestController
 @RequestMapping("/pedido")
@@ -28,6 +32,9 @@ public class PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
+    
+    @Autowired
+	public EmailService emailService;
 
     @GetMapping("/{id}")
     public ResponseEntity<Pedido> findById(@PathVariable Integer id) {
@@ -46,15 +53,24 @@ public class PedidoController {
         return pedidoService.count();
     }
 
+    
     @PostMapping
-    public ResponseEntity<Pedido> save(@RequestBody Pedido pedido) {
+    public ResponseEntity<Pedido> save(@RequestBody Pedido pedido) throws MessagingException, EmailException {
         HttpHeaders headers = new HttpHeaders();
 
+        Integer id = pedido.getPedidoId(); 
+        PedidoVO novoPedidoVO = new PedidoVO();
+        
+        pedidoService.emitirPedido(id);
+        emailService.emailPedidoFinalizado(novoPedidoVO);	
+        
         if (null != pedidoService.save(pedido))
             return new ResponseEntity<>(pedidoService.save(pedido), headers, HttpStatus.OK);
         else
             return new ResponseEntity<>(pedidoService.save(pedido), headers, HttpStatus.BAD_REQUEST);
     }
+    
+    
 
     @PutMapping
     public ResponseEntity<Pedido> update(@Valid @RequestParam Integer id, @RequestBody Pedido pedido) {
