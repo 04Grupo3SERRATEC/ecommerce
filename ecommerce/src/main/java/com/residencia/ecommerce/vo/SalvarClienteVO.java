@@ -1,54 +1,29 @@
-package com.residencia.ecommerce.entities;
+package com.residencia.ecommerce.vo;
 
 import java.util.Calendar;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "cliente")
-public class Cliente {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cliente_id")
+public class SalvarClienteVO {
+
 	private Integer clienteId;
-	
-	@Column(name = "email")
 	private String email;
-	
-	@Column(name = "username")
 	private String username;
 	
 	@NotBlank (message = "A senha não pode ser nula!")
-	@Column(name = "senha")
 	private String senha;
-	
-	@Column(name = "nome_cliente")
-	private String nomeCliente;
+	private String telefone;
+	private String cep;
 	
 	@NotBlank (message = "O CPF não pode ser nulo")
 	@Size(max = 11, message = "Use somente números!")
 	@Size(min = 11, message = "CPF inválido")
-	@Column(name = "cpf", nullable = false, length = 11)
 	private String cpf;
-	
-	@Column(name = "telefone")
-	private String telefone;
-	
-	@Column(name = "data_nascimento")
+	private String complemento;
+	private Integer numero;
+	private String nomeCliente;
 	private Calendar dataNascimento;
-	
-	@JoinColumn(name = "endereco_id", referencedColumnName = "endereco_id")
-	@ManyToOne
-	private Endereco endereco;
 
 	public Integer getClienteId() {
 		return clienteId;
@@ -82,12 +57,20 @@ public class Cliente {
 		this.senha = senha;
 	}
 
-	public String getNomeCliente() {
-		return nomeCliente;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public String getCpf() {
@@ -98,12 +81,12 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getNomeCliente() {
+		return nomeCliente;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
 	}
 
 	public Calendar getDataNascimento() {
@@ -114,11 +97,20 @@ public class Cliente {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public String getComplemento() {
+		return complemento;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
 }

@@ -1,16 +1,12 @@
 package com.residencia.ecommerce.services;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.residencia.ecommerce.entities.Endereco;
 import com.residencia.ecommerce.repositories.EnderecoRepository;
-import com.residencia.ecommerce.vo.CepVO;
 
 @Service
 public class EnderecoService {
@@ -66,13 +62,14 @@ public class EnderecoService {
 		}
 	}
 
-	public CepVO consultarEndereçoCep(String cep) {
-		RestTemplate restTemplate = new RestTemplate();
-		String uri = "https://viacep.com.br/ws/{cep}/json/";
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("cep", cep);
-		CepVO cepVO = restTemplate.getForObject(uri, CepVO.class, params);
-
-		return cepVO;
-	}
+//	public CepVO consultarEnderecoCep(String cep, Cliente cliente) {
+//		RestTemplate restTemplate = new RestTemplate();
+//		String uri = "https://viacep.com.br/ws/{cep}/json/";
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("cep", cep);
+//		CepVO cepVO = restTemplate.getForObject(uri, CepVO.class, params);
+//		
+//
+//		return cepVO;
+//	}
 }

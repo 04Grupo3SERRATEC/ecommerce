@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.residencia.ecommerce.entities.Pedido;
 import com.residencia.ecommerce.services.PedidoService;
+import com.residencia.ecommerce.vo.FinalizarPedidoVO;
 
 @RestController
 @RequestMapping("/pedido")
@@ -56,8 +57,22 @@ public class PedidoController {
     }
 
     @PutMapping
-    public Pedido update(@Valid @RequestParam Integer id, @RequestBody Pedido pedido) {
-        return pedidoService.update(id, pedido);
+    public ResponseEntity<Pedido> update(@Valid @RequestParam Integer id, @RequestBody Pedido pedido) {
+    	HttpHeaders headers = new HttpHeaders();
+    	if (pedidoService.update(id, pedido)) {
+    		return new ResponseEntity<>(headers, HttpStatus.LOCKED);
+    	}
+        else
+            return new ResponseEntity<>(headers, HttpStatus.OK);
+    }
+    
+    @PutMapping("/finalizarPedido")
+    public ResponseEntity<FinalizarPedidoVO> finalizarPedido(@Valid @RequestParam Integer id, @RequestBody FinalizarPedidoVO finalizarPedidoVO) {
+    	HttpHeaders headers = new HttpHeaders();
+    	if (pedidoService.finalizarPedidoVO(id, finalizarPedidoVO))
+    		return new ResponseEntity<>(headers, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping

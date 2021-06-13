@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.residencia.ecommerce.entities.Cliente;
 import com.residencia.ecommerce.services.ClienteService;
 import com.residencia.ecommerce.vo.ClienteVO;
+import com.residencia.ecommerce.vo.SalvarClienteVO;
 
 @RestController
 @RequestMapping("/cliente")
@@ -57,19 +58,20 @@ public class ClienteController {
 //		else
 //			return new ResponseEntity<>(novoClienteVO, headers, HttpStatus.BAD_REQUEST);
 //	}
-	
-	@PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Cliente> save(@Valid @RequestBody Cliente cliente) {
-        HttpHeaders headers = new HttpHeaders();
 
-        if (null != clienteService.save(cliente))
-            return new ResponseEntity<>(clienteService.save(cliente), headers, HttpStatus.OK);
-        else
-            return new ResponseEntity<>(clienteService.save(cliente), headers, HttpStatus.BAD_REQUEST);
-    }
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<SalvarClienteVO> save(@Valid @RequestBody SalvarClienteVO salvarClienteVO) {
+		HttpHeaders headers = new HttpHeaders();
+
+		if (null != clienteService.save(salvarClienteVO))
+			return new ResponseEntity<>(headers, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
+	}
 
 	@PutMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public ClienteVO update(@Valid @RequestParam Integer id, @RequestBody ClienteVO clienteVO) {
 		return clienteService.update(id, clienteVO);
 	}

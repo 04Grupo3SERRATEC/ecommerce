@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.residencia.ecommerce.entities.Endereco;
 import com.residencia.ecommerce.services.EnderecoService;
-import com.residencia.ecommerce.vo.CepVO;
 
 @RestController
 @RequestMapping("/endereco")
@@ -73,10 +72,10 @@ public class EnderecoController {
         }
     }
     
-    @GetMapping("/consutarcep/{cep}")
-    public ResponseEntity<CepVO> consultarCep(@PathVariable String cep) {
-        HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(enderecoService.consultarEndereçoCep(cep), headers, HttpStatus.OK);
-    }
+//    @GetMapping("/consutarcep/{cep}")
+//    public ResponseEntity<CepVO> consultarCep(@PathVariable String cep) {
+//        HttpHeaders headers = new HttpHeaders();
+//        return new ResponseEntity<>(enderecoService.consultarEnderecoCep(cep), headers, HttpStatus.OK);
+//    }
 
 }

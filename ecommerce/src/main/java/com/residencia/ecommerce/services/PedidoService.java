@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.residencia.ecommerce.entities.Pedido;
 import com.residencia.ecommerce.repositories.PedidoRepository;
+import com.residencia.ecommerce.vo.FinalizarPedidoVO;
 
 @Service
 public class PedidoService {
@@ -35,7 +36,29 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
 
-    public Pedido update(Integer id, Pedido pedido) {
+    public boolean update(Integer id, Pedido pedido) {
+    	Pedido pedido2 = new Pedido();
+    	pedido2 = pedidoRepository.findById(id).get();
+        if(pedido2.getStatus().equalsIgnoreCase("finalizado")) {
+        	return true;
+        } else {
+        	updateNaoFinalizado(id, pedido);
+        	return false;
+        }
+    }
+    
+    public boolean finalizarPedidoVO(Integer id, FinalizarPedidoVO finalizarPedidoVO) {
+    	Pedido pedido2 = new Pedido();
+    	pedido2 = pedidoRepository.findById(id).get();
+        if(pedido2.getStatus().equalsIgnoreCase("finalizado")) {
+        	return false;
+        } else {
+        	updateFinalizado(id, finalizarPedidoVO);
+        	return true;
+        }
+    }
+    
+    public Pedido updateNaoFinalizado(Integer id, Pedido pedido) {
         Pedido novoPedido = pedidoRepository.findById(id).get();
         updateDados(novoPedido, pedido);
         return pedidoRepository.save(novoPedido);
@@ -50,6 +73,13 @@ public class PedidoService {
         novoPedido.setPedidoId(pedido.getPedidoId());
         novoPedido.setValorTotalPedido(pedido.getValorTotalPedido());
     }
+    
+    private void updateFinalizado(Integer id, FinalizarPedidoVO finalizarPedidoVO) {
+    	Pedido pedido = new Pedido();
+    	pedido = pedidoRepository.findById(id).get();
+        pedido.setStatus(finalizarPedidoVO.getStatus());
+        pedidoRepository.save(pedido);
+    }
 
     public boolean delete(Integer id) {
         if(id != null) {
@@ -59,5 +89,7 @@ public class PedidoService {
             return false;
         }
     }
+    
+    
 
 }

@@ -16,17 +16,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-@Override
-protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, 
-        HttpHeaders headers, HttpStatus status, WebRequest request){
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-   List<String> listErros = new ArrayList<String>();
-   for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-	   listErros.add(error.getField() + ": " + error.getDefaultMessage());
-   }
-	ErroResposta erroResposta = new ErroResposta(status.value(), "Existem campos inválidos!", LocalDateTime.now(), listErros);
-	
-	return super.handleExceptionInternal(ex, erroResposta, headers, status, request); 
-}
+		List<String> listErros = new ArrayList<String>();
+		for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+			listErros.add(error.getField() + ": " + error.getDefaultMessage());
+		}
+		ErroResposta erroResposta = new ErroResposta(status.value(), "Existem campos inválidos!", LocalDateTime.now(),
+				listErros);
+
+		return super.handleExceptionInternal(ex, erroResposta, headers, status, request);
+	}
 
 }

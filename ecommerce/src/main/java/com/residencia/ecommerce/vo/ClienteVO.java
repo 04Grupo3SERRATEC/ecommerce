@@ -1,7 +1,5 @@
 package com.residencia.ecommerce.vo;
 
-import com.residencia.ecommerce.entities.Endereco;
-
 public class ClienteVO {
 
 	private Integer clienteId;
@@ -9,7 +7,7 @@ public class ClienteVO {
 	private String username;
 	private String senha;
 	private String telefone;
-	private Endereco endereco;
+	private String cep;
 
 	public Integer getClienteId() {
 		return clienteId;
@@ -51,12 +49,12 @@ public class ClienteVO {
 		this.telefone = telefone;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
-
+	
 }
