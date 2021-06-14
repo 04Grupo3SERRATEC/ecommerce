@@ -3,12 +3,18 @@ package com.residencia.ecommerce.vo;
 import java.util.Calendar;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class SalvarClienteVO {
 
 	private Integer clienteId;
+	
+	@NotBlank (message = "O Email não pode ser nulo!")
 	private String email;
+	
+	@NotBlank (message = "O Username não pode ser nulo!")
+    @Size(max = 10, message = "O Username não pode ter mais que 10 caracteres!")
 	private String username;
 	
 	@NotBlank (message = "A senha não pode ser nula!")
@@ -23,6 +29,8 @@ public class SalvarClienteVO {
 	private String complemento;
 	private Integer numero;
 	private String nomeCliente;
+	
+	@NotNull (message = "Data de nascimento não pode ser nula!")
 	private Calendar dataNascimento;
 
 	public Integer getClienteId() {

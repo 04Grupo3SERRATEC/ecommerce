@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -21,9 +22,12 @@ public class Cliente {
 	@Column(name = "cliente_id")
 	private Integer clienteId;
 	
+	@NotBlank (message = "O Email não pode ser nulo!")
 	@Column(name = "email")
 	private String email;
 	
+	@NotBlank (message = "O Username não pode ser nulo!")
+    @Size(max = 10, message = "O Username não pode ter mais que 10 caracteres!")
 	@Column(name = "username")
 	private String username;
 	
@@ -31,6 +35,7 @@ public class Cliente {
 	@Column(name = "senha")
 	private String senha;
 	
+	@NotBlank (message = "O Nome não pode ser nulo!")
 	@Column(name = "nome_cliente")
 	private String nomeCliente;
 	
@@ -40,9 +45,13 @@ public class Cliente {
 	@Column(name = "cpf", nullable = false, length = 11)
 	private String cpf;
 	
+	@NotBlank (message = "O telefone não pode ser nulo")
+	@Size(max = 11, message = "Use somente números!")
+	@Size(min = 10, message = "Número inválido")
 	@Column(name = "telefone")
 	private String telefone;
 	
+	@NotNull (message = "Data de nascimento não pode ser nula!")
 	@Column(name = "data_nascimento")
 	private Calendar dataNascimento;
 	

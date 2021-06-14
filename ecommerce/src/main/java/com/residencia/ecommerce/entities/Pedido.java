@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "pedido")
@@ -22,21 +25,27 @@ public class Pedido {
 	@Column(name = "pedido_id")
 	private Integer pedidoId;
 
+	@NotNull (message = "Adicione o numero do pedido! ")
 	@Column(name = "numero_pedido")
 	private Integer numeroPedido;
 
+	@NotNull(message = "Adicione um preço! ")
+    @DecimalMin(value = "5", message = "O preço não pode ser menor que R$ {value}.00")
 	@Column(name = "valor_total_pedido")
 	private BigDecimal valorTotalPedido;
 	
 	@Column(name = "lista_de_produtos_do_pedido")
 	private String listaDeProdutosDoPedido;
 
+	@NotNull(message = "Adicione a data do pedido! ")
 	@Column(name = "data_pedido")
 	private Calendar dataPedido;
 
+	@NotBlank (message = "Adicione um status do pedido! ")
 	@Column(name = "status")
 	private String status;
 
+	@NotNull (message = "Adicione o ID do cliente! ")
 	@JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
 	@ManyToOne
 	private Cliente cliente;

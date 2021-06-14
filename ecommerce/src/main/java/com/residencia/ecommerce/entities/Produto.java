@@ -49,9 +49,6 @@ public class Produto {
 	@Column(name = "data_cadastro_produto")
 	@Temporal(TemporalType.DATE)
 	private Calendar dataCadastroProduto;
-	
-	@Column(name = "imagem")
-	private String imagens;
 
 	@JoinColumn(name = "categoria_id", referencedColumnName = "categoria_id")
 	@ManyToOne
@@ -59,6 +56,8 @@ public class Produto {
 
 	@OneToOne(mappedBy = "produto")
 	private ProdutoPedido produtoPedido;
+	
+	// Imagem dava: Current request is not a multipart
 
 	public Integer getProdutoId() {
 		return produtoId;
@@ -123,13 +122,5 @@ public class Produto {
 	public void setProdutoPedido(ProdutoPedido produtoPedido) {
 		this.produtoPedido = produtoPedido;
 	}
-
-	public String getImagens() {
-		return imagens;
-	}
-
-	public void setImagens(String imagens) {
-		this.imagens = imagens;
-	}
-
+	
 }
